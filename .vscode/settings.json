@@ -1,0 +1,33 @@
+{
+  "C_Cpp.intelliSenseEngine": "default",
+  "idf.espIdfPathWin": "d:\\Dev_esp\\esp-idf",
+  "idf.pythonInstallPath": "C:\\Users\\manht\\.espressif\\tools\\idf-python\\3.11.2\\python.exe",
+  "idf.openOcdConfigs": [
+    "board/esp32c3-builtin.cfg"
+  ],
+  "idf.portWin": "COM10",
+  "idf.toolsPathWin": "C:\\Users\\manht\\.espressif",
+  "idf.customExtraVars": {
+    "IDF_TARGET": "esp32c3"
+  },
+  "clangd.path": "C:\\Users\\manht\\.espressif\\tools\\esp-clang\\esp-19.1.2_20250312\\esp-clang\\bin\\clangd.exe",
+  "clangd.arguments": [
+    "--background-index",
+    "--query-driver=C:\\Users\\manht\\.espressif\\tools\\xtensa-esp-elf\\esp-14.2.0_20250730\\xtensa-esp-elf\\bin\\xtensa-esp32-elf-gcc.exe",
+    "--compile-commands-dir=${workspaceFolder}\\build"
+  ],
+  "idf.flashType": "UART",
+  "files.associations": {
+    "esp_err.h": "c",
+    "esp_codec_dev_types.h": "c",
+    "esp_lvgl_port.h": "c",
+    "esp32_c3_lcdkit.h": "c",
+    "esp_lvgl_port_compatibility.h": "c",
+    "esp_log.h": "c",
+    "esp-bsp.h": "c",
+    "sdkconfig.h": "c",
+    "esp_lcd_types.h": "c",
+    "lfs.h": "c",
+    "lv_global.h": "c"
+  }
+}
