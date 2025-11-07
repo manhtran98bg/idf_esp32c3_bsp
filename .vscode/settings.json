@@ -1,12 +1,12 @@
 {
   "C_Cpp.intelliSenseEngine": "default",
-  "idf.espIdfPathWin": "d:\\Dev_esp\\esp-idf",
-  "idf.pythonInstallPath": "C:\\Users\\manht\\.espressif\\tools\\idf-python\\3.11.2\\python.exe",
+  "idf.espIdfPathWin": "C:/Espressif/frameworks/esp-idf-v5.5/",
+  "idf.pythonInstallPath": "C:\\Espressif\\tools\\idf-python\\3.11.2\\python.exe",
   "idf.openOcdConfigs": [
     "board/esp32c3-builtin.cfg"
   ],
-  "idf.portWin": "COM10",
-  "idf.toolsPathWin": "C:\\Users\\manht\\.espressif",
+  "idf.portWin": "COM4",
+  "idf.toolsPathWin": "C:\\Espressif",
   "idf.customExtraVars": {
     "IDF_TARGET": "esp32c3"
   },
@@ -28,6 +28,31 @@
     "sdkconfig.h": "c",
     "esp_lcd_types.h": "c",
     "lfs.h": "c",
-    "lv_global.h": "c"
+    "lv_global.h": "c",
+    "stdio.h": "c",
+    "fcntl.h": "c",
+    "errno.h": "c",
+    "littlefs_api.h": "c",
+    "esp_chip_info.h": "c",
+    "esp_littlefs.h": "c",
+    "esp_random.h": "c",
+    "esp_system.h": "c",
+    "esp32_c3_lv_littlefs_port.h": "c",
+    "esp_idf_version.h": "c",
+    "stdint.h": "c",
+    "esp_partition.h": "c",
+    "app_manager.h": "c",
+    "bsp_err_check.h": "c",
+    "lvgl.h": "c",
+    "cstdio": "c",
+    "lv_gif.h": "c",
+    "esp_lvgl_port_priv.h": "c",
+    "esp_lvgl_port_disp.h": "c",
+    "esp_lcd_panel_ops.h": "c",
+    "esp_check.h": "c",
+    "esp_animated_gif.h": "c",
+    "otto_emoji_gif.h": "c",
+    "timer.h": "c",
+    "esp_timer.h": "c"
   }
 }

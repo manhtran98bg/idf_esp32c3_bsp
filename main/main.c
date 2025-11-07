@@ -17,7 +17,14 @@
 
 #include "app_manager.h"
 static const char * TAG = "app_main";
+static void print_heap_remain(void * param) {
+    while (1) {
+        ESP_LOGI(TAG,"Free heap size %u", esp_get_free_heap_size());
+        vTaskDelay(pdMS_TO_TICKS(1000));
+    }
+}
 void app_main(void)
 {
+    xTaskCreate(print_heap_remain, "print_heap_remain", 2048, NULL, 1, NULL);
     ESP_ERROR_CHECK(app_manager_init());
 }

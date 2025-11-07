@@ -369,6 +369,16 @@ esp_err_t bsp_littlefs_mount(void);
  */
 esp_err_t bsp_littlefs_unmount(void);
 
+/**
+ * @brief Mount LittleFS to lvgl file system
+ *
+ * @return
+ *      - ESP_OK on success  
+ *      - ESP_FAIL if the partition cannot be unmounted  
+ */
+esp_err_t bsp_lvgl_littlefs_mount();
+
+
 /** @} */
 
 
