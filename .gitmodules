@@ -2,3 +2,7 @@
 	path = components/esp_littlefs
 	url = https://github.com/manhtran98bg/esp_littlefs.git
 	branch = master
+[submodule "components/esp_animated_gif"]
+	path = components/esp_animated_gif
+	url = https://github.com/manhtran98bg/esp_animated_gif.git
+	branch = main
