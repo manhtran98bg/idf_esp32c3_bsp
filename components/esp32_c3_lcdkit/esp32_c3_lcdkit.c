@@ -27,7 +27,7 @@
 #include "esp_codec_dev_defaults.h"
 
 #include "esp_littlefs.h"
-
+#include "esp_animated_gif.h"
 
 static const char *TAG = "esp32c3_bsp";
 
@@ -92,6 +92,8 @@ static const knob_config_t bsp_encoder_a_b_config = {
     .gpio_encoder_b = BSP_ENCODER_B,
 };
 
+static esp_lcd_panel_io_handle_t io_handle = NULL;
+static esp_lcd_panel_handle_t panel_handle = NULL;
 esp_err_t bsp_led_init()
 {
     ESP_LOGI(TAG, "BLINK_GPIO setting %d", bsp_strip_config.strip_gpio_num);
@@ -217,7 +219,6 @@ esp_err_t bsp_littlefs_mount(void)
         .format_if_mount_failed = true,
         .dont_mount = false,
     };
-
     esp_err_t ret_val = esp_vfs_littlefs_register(&conf);
 
     BSP_ERROR_CHECK_RETURN_ERR(ret_val);
@@ -232,24 +233,44 @@ esp_err_t bsp_littlefs_mount(void)
     {
         ESP_LOGI(TAG, "Partition size: total: %d, used: %d", total, used);
     }
-
     return ret_val;
 }
+
+
 esp_err_t bsp_littlefs_unmount(void)
 {
     return esp_vfs_littlefs_unregister(BSP_LITTLEFS_PARTITION_LABEL);
 }
+
+ 
+static void bsp_display_lcd_draw(int x, int y, int w, int h, const void *data) 
+{
+    // ESP_LOGI(TAG, "Draw at %d, %d size %d x %d", x, y, w, h);
+    if (w <= 0 || h <= 0)
+        return;
+    int x1 = x;
+    int y1 = y;
+    int x2 = w + x;
+    int y2 = h + y;
+    if (panel_handle) 
+    {
+        bsp_display_lock(0);
+        esp_lcd_panel_draw_bitmap(panel_handle, x1, y1, x2, y2, data);
+        bsp_display_unlock();
+    }
+        
+}
 static lv_display_t *bsp_display_lcd_init(const bsp_display_cfg_t *cfg)
 {
     assert(cfg != NULL);
-    esp_lcd_panel_io_handle_t io_handle = NULL;
-    esp_lcd_panel_handle_t panel_handle = NULL;
     const bsp_display_config_t bsp_disp_cfg = {
         .max_transfer_sz = BSP_LCD_H_RES * 80 * sizeof(uint16_t),
     };
     BSP_ERROR_CHECK_RETURN_NULL(bsp_display_new(&bsp_disp_cfg, &panel_handle, &io_handle));
 
     esp_lcd_panel_disp_on_off(panel_handle, true);
+
+    esp_GIF_begin(1, 240, 240, bsp_display_lcd_draw);
 
     /* Add LCD screen */
     ESP_LOGD(TAG, "Add LCD screen");
@@ -464,4 +485,34 @@ bool bsp_display_lock(uint32_t timeout_ms)
 void bsp_display_unlock(void)
 {
     lvgl_port_unlock();
+}
+
+esp_err_t bsp_lvgl_littlefs_mount() 
+{
+    lv_fs_littlefs_init();
+    esp_vfs_littlefs_conf_t conf = {
+        .base_path = BSP_LITTLEFS_MOUNT_POINT,
+        .partition_label = BSP_LITTLEFS_PARTITION_LABEL,
+        .format_if_mount_failed = true,
+        .dont_mount = false,
+    };
+    lfs_t *lfs = esp_littlefs_lvgl_port_init(&conf);
+    if (lfs != NULL)
+    {
+        lv_littlefs_set_handler(lfs);
+        lv_fs_file_t file;
+        lv_fs_res_t ret = lv_fs_open(&file, "A:/gif/data.txt", LV_FS_MODE_RD);
+        if (ret != LV_FS_RES_OK)
+        {
+            ESP_LOGI(TAG, "lv_fs_open failed %d", (int)ret);
+            return ESP_FAIL;
+        }
+        char * buffer = (char*) malloc(100 * sizeof(char));
+        uint32_t byte = 0;
+        
+        lv_fs_read(&file, buffer, 100, &byte);
+        buffer[byte] ='\0';
+        printf("%s\r\n",buffer);
+    }
+    return ESP_OK;
 }

@@ -2,7 +2,8 @@
 # CMakeLists in this exact order for cmake to work correctly
 cmake_minimum_required(VERSION 3.16)
 
-add_compile_options(-I${CMAKE_CURRENT_LIST_DIR}/managed_components/joltwallet__littlefs/src/littlefs)
+add_compile_options(-I${CMAKE_CURRENT_LIST_DIR}/components/esp_littlefs/src/littlefs)
+add_compile_options(-I${CMAKE_CURRENT_LIST_DIR}/components/esp_littlefs/src/)
 
 include($ENV{IDF_PATH}/tools/cmake/project.cmake)
 # "Trim" the build. Include the minimal set of components, main, and anything it depends on.
