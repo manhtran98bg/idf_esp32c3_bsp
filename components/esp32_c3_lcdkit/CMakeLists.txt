@@ -10,5 +10,5 @@ idf_component_register(
     SRCS "esp32_c3_lcdkit.c"
     INCLUDE_DIRS "include"
     PRIV_INCLUDE_DIRS "priv_include"
-    REQUIRES ${REQ} fatfs esp_littlefs animated_gif
+    REQUIRES ${REQ} fatfs esp_littlefs esp_animated_gif
     PRIV_REQUIRES ${PRIV_REQ} esp_lcd spiffs esp_psram)

@@ -1,12 +1,12 @@
 {
   "C_Cpp.intelliSenseEngine": "default",
-  "idf.espIdfPathWin": "C:/Espressif/frameworks/esp-idf-v5.5/",
-  "idf.pythonInstallPath": "C:\\Espressif\\tools\\idf-python\\3.11.2\\python.exe",
+  "idf.espIdfPathWin": "d:\\Dev_esp\\esp-idf",
+  "idf.pythonInstallPath": "C:\\Users\\manht\\.espressif\\tools\\idf-python\\3.11.2\\python.exe",
   "idf.openOcdConfigs": [
     "board/esp32c3-builtin.cfg"
   ],
-  "idf.portWin": "COM4",
-  "idf.toolsPathWin": "C:\\Espressif",
+  "idf.portWin": "COM10",
+  "idf.toolsPathWin": "C:\\Users\\manht\\.espressif",
   "idf.customExtraVars": {
     "IDF_TARGET": "esp32c3"
   },
@@ -53,6 +53,12 @@
     "esp_animated_gif.h": "c",
     "otto_emoji_gif.h": "c",
     "timer.h": "c",
-    "esp_timer.h": "c"
+    "esp_timer.h": "c",
+    "format": "c",
+    "xiosbase": "c",
+    "rlottie_capi.h": "c",
+    "string.h": "c",
+    "lv_obj_class_private.h": "c",
+    "lv_image_private.h": "c"
   }
 }

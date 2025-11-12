@@ -15,4 +15,5 @@ dependencies:
   #   # All dependencies of `main` are public by default.
   #   public: true
   # espressif/arduino-esp32: ^3.3.2
-  txp666/otto-emoji-gif-component: ^1.0.4
+  # txp666/otto-emoji-gif-component: ^1.0.4
+  lvgl/lvgl: ^9.4.0

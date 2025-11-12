@@ -1,6 +1,6 @@
 [submodule "components/esp_littlefs"]
 	path = components/esp_littlefs
-	url = https://github.com/manhtran98bg/esp_littlefs.git
+	url = https://github.com/joltwallet/esp_littlefs.git
 	branch = master
 [submodule "components/esp_animated_gif"]
 	path = components/esp_animated_gif

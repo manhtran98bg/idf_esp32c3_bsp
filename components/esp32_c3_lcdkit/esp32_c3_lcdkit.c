@@ -242,24 +242,6 @@ esp_err_t bsp_littlefs_unmount(void)
     return esp_vfs_littlefs_unregister(BSP_LITTLEFS_PARTITION_LABEL);
 }
 
- 
-static void bsp_display_lcd_draw(int x, int y, int w, int h, const void *data) 
-{
-    // ESP_LOGI(TAG, "Draw at %d, %d size %d x %d", x, y, w, h);
-    if (w <= 0 || h <= 0)
-        return;
-    int x1 = x;
-    int y1 = y;
-    int x2 = w + x;
-    int y2 = h + y;
-    if (panel_handle) 
-    {
-        bsp_display_lock(0);
-        esp_lcd_panel_draw_bitmap(panel_handle, x1, y1, x2, y2, data);
-        bsp_display_unlock();
-    }
-        
-}
 static lv_display_t *bsp_display_lcd_init(const bsp_display_cfg_t *cfg)
 {
     assert(cfg != NULL);
@@ -269,8 +251,6 @@ static lv_display_t *bsp_display_lcd_init(const bsp_display_cfg_t *cfg)
     BSP_ERROR_CHECK_RETURN_NULL(bsp_display_new(&bsp_disp_cfg, &panel_handle, &io_handle));
 
     esp_lcd_panel_disp_on_off(panel_handle, true);
-
-    esp_GIF_begin(1, 240, 240, bsp_display_lcd_draw);
 
     /* Add LCD screen */
     ESP_LOGD(TAG, "Add LCD screen");
@@ -489,6 +469,7 @@ void bsp_display_unlock(void)
 
 esp_err_t bsp_lvgl_littlefs_mount() 
 {
+    #ifdef LVGL_LITTLEFS_PORT
     lv_fs_littlefs_init();
     esp_vfs_littlefs_conf_t conf = {
         .base_path = BSP_LITTLEFS_MOUNT_POINT,
@@ -515,4 +496,7 @@ esp_err_t bsp_lvgl_littlefs_mount()
         printf("%s\r\n",buffer);
     }
     return ESP_OK;
+    #else 
+    return ESP_OK;
+    #endif
 }
